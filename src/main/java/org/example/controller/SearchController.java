@@ -1,11 +1,10 @@
-package org.example.servlet;
+package org.example.controller;
 
 import org.example.HttpRequest;
 import org.example.HttpResponse;
 
-public class SearchServlet implements HttpServlet {
-    @Override
-    public void service(HttpRequest request, HttpResponse response) {
+public class SearchController {
+    public void search(HttpRequest request, HttpResponse response) {
         String query = request.getParameter("q");
         response.writeBody("<h1>Search</h1>");
         response.writeBody("<ul>");
