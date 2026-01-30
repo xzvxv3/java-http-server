@@ -1,6 +1,7 @@
 package org.example;
 
 import lombok.SneakyThrows;
+import org.example.annotation.AnnotationServlet;
 import org.example.controller.SearchController;
 import org.example.controller.SiteController;
 import org.example.servlet.*;
@@ -14,13 +15,11 @@ public class ServerMain {
     @SneakyThrows
     public static void main(String[] args) {
         List<Object> controllers = List.of(new SiteController(), new SearchController());
-        ReflectionServlet reflectionServlet = new ReflectionServlet(controllers);
+        AnnotationServlet servlet = new AnnotationServlet(controllers);
 
         ServletManager servletManager = new ServletManager();
-        servletManager.setDefaultServlet(reflectionServlet);
-        servletManager.add("/", new HomeServlet());
+        servletManager.setDefaultServlet(servlet);
         servletManager.add("/favicon.ico", new DiscardServlet());
-
         HttpServer server = new HttpServer(PORT, servletManager);
         server.start();
     }
