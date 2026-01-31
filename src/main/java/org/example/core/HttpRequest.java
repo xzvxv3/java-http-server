@@ -1,4 +1,4 @@
-package org.example;
+package org.example.core;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -24,12 +24,15 @@ public class HttpRequest {
     private final Map<String, String> queryParameters = new HashMap<>();
     private final Map<String, String> headers = new HashMap<>();
 
+    @SneakyThrows
     public HttpRequest(BufferedReader reader) {
         parseRequestLine(reader);
         parseHeaders(reader);
+        parseBody(reader);
     }
 
     // GET /search?q=hello HTTP/1.1
+
     @SneakyThrows
     private void parseRequestLine(BufferedReader reader) {
         String requestLine = reader.readLine(); // bufferedReader -> 한 줄씩 처리
@@ -51,11 +54,11 @@ public class HttpRequest {
             parseQueryParameters(pathParts[1]);
         }
     }
-
 //     q=hello
 //     key1=value1&key2=value2
 //     키1=값1 -> %키1 = %값1
 //     q=
+
     private void parseQueryParameters(String queryString) {
         for(String param : queryString.split("&")) {
             String[] keyValue = param.split("=");
@@ -64,17 +67,39 @@ public class HttpRequest {
             queryParameters.put(key, value);
         }
     }
-
 //        Host: localhost:12345
 //        Connection: keep-alive
 //        Cache-Control: max-age=0
 //        (Empty)
+
     @SneakyThrows
     private void parseHeaders(BufferedReader reader) {
         String line;
         while(!(line = reader.readLine()).isEmpty()) {
             String[] headerParts = line.split(":");
             headers.put(headerParts[0].trim(), headerParts[1].trim());
+        }
+    }
+
+    @SneakyThrows
+    private void parseBody(BufferedReader reader) {
+        if (!headers.containsKey("Content-Length")) {
+            return;
+        }
+
+        int contentLength = Integer.parseInt(headers.get("Content-Length"));
+        char[] bodyChars = new char[contentLength];
+        int read = reader.read(bodyChars);
+        if (read != contentLength) {
+            throw new IOException("Failed to read entire body. Expected " +
+                    contentLength + " bytes, but read " + read);
+        }
+        String body = new String(bodyChars);
+        log.info("HTTP Message Body: " + body);
+
+        String contentType = headers.get("Content-Type");
+        if ("application/x-www-form-urlencoded".equals(contentType)) {
+            parseQueryParameters(body);
         }
     }
 
