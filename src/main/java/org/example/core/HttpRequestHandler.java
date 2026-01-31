@@ -1,8 +1,9 @@
-package org.example;
+package org.example.core;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.example.servlet.ServletManager;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -37,7 +38,7 @@ public class HttpRequestHandler implements Runnable {
             HttpResponse response = new HttpResponse(writer);
 
             log.info("HTTP 요청: " + request);
-            Thread.sleep(1500); // 서버의 요청 처리 시간
+            // Thread.sleep(1500); // 서버의 요청 처리 시간
 
             servletManager.execute(request, response);
             response.flush();

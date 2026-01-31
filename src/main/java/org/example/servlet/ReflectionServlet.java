@@ -2,8 +2,8 @@ package org.example.servlet;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.example.HttpRequest;
-import org.example.HttpResponse;
+import org.example.core.HttpRequest;
+import org.example.core.HttpResponse;
 import org.example.exception.PageNotFoundException;
 
 import java.lang.reflect.InvocationTargetException;

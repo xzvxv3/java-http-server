@@ -1,8 +1,8 @@
 package org.example.annotation;
 
 import lombok.RequiredArgsConstructor;
-import org.example.HttpRequest;
-import org.example.HttpResponse;
+import org.example.core.HttpRequest;
+import org.example.core.HttpResponse;
 import org.example.exception.PageNotFoundException;
 import org.example.servlet.HttpServlet;
 

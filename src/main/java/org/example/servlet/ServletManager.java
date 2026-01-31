@@ -1,12 +1,11 @@
-package org.example;
+package org.example.servlet;
 
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.example.core.HttpRequest;
+import org.example.core.HttpResponse;
 import org.example.exception.PageNotFoundException;
-import org.example.servlet.HttpServlet;
-import org.example.servlet.InternalErrorServlet;
-import org.example.servlet.NotFoundServlet;
 
 import java.util.HashMap;
 import java.util.Map;

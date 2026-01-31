@@ -1,7 +1,7 @@
 package org.example.servlet;
 
-import org.example.HttpRequest;
-import org.example.HttpResponse;
+import org.example.core.HttpRequest;
+import org.example.core.HttpResponse;
 
 public class NotFoundServlet implements HttpServlet {
     @Override

@@ -1,7 +1,8 @@
-package org.example;
+package org.example.core;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.servlet.ServletManager;
 
 import java.io.IOException;
 import java.net.ServerSocket;

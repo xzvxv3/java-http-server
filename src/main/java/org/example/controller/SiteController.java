@@ -1,6 +1,6 @@
 package org.example.controller;
 
-import org.example.HttpResponse;
+import org.example.core.HttpResponse;
 import org.example.annotation.Mapping;
 
 public class SiteController {

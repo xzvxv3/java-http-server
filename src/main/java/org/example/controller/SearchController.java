@@ -1,7 +1,7 @@
 package org.example.controller;
 
-import org.example.HttpRequest;
-import org.example.HttpResponse;
+import org.example.core.HttpRequest;
+import org.example.core.HttpResponse;
 import org.example.annotation.Mapping;
 
 public class SearchController {
